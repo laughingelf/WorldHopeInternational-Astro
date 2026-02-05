@@ -87,6 +87,19 @@ export default function ContactForm() {
                   Don’t fill this out: <input name="bot-field" />
                 </label>
               </p>
+              <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+                <input type="hidden" name="form-name" value="contact" />
+                <input name="bot-field" />
+                <input name="topic" />
+                <input name="topic_final" />
+                <input name="otherTopic" />
+                <input name="name" />
+                <input name="email" />
+                <input name="phone" />
+                <input name="preferredContact" />
+                <textarea name="message"></textarea>
+              </form>
+
 
               {/* Topic */}
               <div>
