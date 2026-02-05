@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 
 const donationTiers = [50, 100, 250, 500];
 
@@ -81,54 +81,39 @@ export default function DonateIsland() {
   };
 
   const handleDonate = async () => {
-    setErrorMsg("");
-    setIsLoading(true);
+  setErrorMsg("");
+  setIsLoading(true);
 
-    try {
-      if (!stripePromise) {
-        throw new Error("Stripe public key missing. Set PUBLIC_STRIPE_PUBLIC_KEY.");
-      }
+  try {
+    const payload = { amount: amountToDonate, isMonthly };
 
-      if (!amountToDonate || amountToDonate < 1) {
-        throw new Error("Please enter a valid donation amount.");
-      }
+    const res = await fetch("/.netlify/functions/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      const payload = {
-        amount: amountToDonate,
-        isMonthly,
-        program,
-      };
-
-      const response = await fetch("/.netlify/functions/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Server Error: ${response.status} - ${errorText}`);
-      }
-
-      const data = await response.json();
-
-      if (!data?.id) {
-        throw new Error("No session ID returned from server.");
-      }
-
-      const stripe = await stripePromise;
-      const result = await stripe.redirectToCheckout({ sessionId: data.id });
-
-      if (result?.error) {
-        throw new Error(result.error.message || "Stripe redirect failed.");
-      }
-    } catch (err) {
-      setErrorMsg(err?.message || "Donation request failed.");
-      console.error("Donate error:", err);
-    } finally {
-      setIsLoading(false);
+    if (!res.ok) {
+      const t = await res.text();
+      throw new Error(`Server Error: ${res.status} - ${t}`);
     }
-  };
+
+    const data = await res.json();
+
+    if (!data?.url) {
+      throw new Error("No Checkout URL returned from server.");
+    }
+
+    // ✅ Stripe-approved replacement for redirectToCheckout
+    window.location.assign(data.url);
+  } catch (err) {
+    setErrorMsg(err?.message || "Donation request failed.");
+    console.error(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <section className="bg-white pt-28 pb-20 px-6 md:px-12 min-h-screen">
