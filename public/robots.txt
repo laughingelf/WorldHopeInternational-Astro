@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /donate/success
+Disallow: /donate/cancel
+
+Sitemap: https://wordhopeinternational.org/sitemap.xml
