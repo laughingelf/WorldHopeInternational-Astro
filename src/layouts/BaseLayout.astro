@@ -1,0 +1,123 @@
+---
+import "../styles/global.css"
+import Navbar from "../components/shared/Navbar.astro";
+import Footer from "../components/shared/Footer.astro";
+
+type Seo = {
+  title?: string;         // page title only (we’ll append site name)
+  description?: string;
+  image?: string;         // absolute URL preferred for sharing
+  canonical?: string;     // absolute URL preferred
+  noindex?: boolean;
+};
+
+type Props = {
+  title?: string;         // fallback title (if seo.title not provided)
+  description?: string;   // fallback description (if seo.description not provided)
+  seo?: Seo;
+  hero?: boolean;         // lets you tweak spacing if hero already handles padding
+  className?: string;     // optional extra classes for <main>
+};
+
+const {
+  title = "Word Hope International",
+  description = "Serving communities through faith, compassion, and sustainable outreach. Learn more, get involved, or donate to support impact.",
+  seo = {},
+  hero = false,
+  className = "",
+} = Astro.props as Props;
+
+const site = {
+  name: "Word Hope International",
+  url: "https://wordhopeinternational.org",
+  themeColor: "#14532d",
+  socialImage: "https://wordhopeinternational.org/img/og/wordhope-og.jpg", // update when you have it
+  logo: "https://wordhopeinternational.org/img/logo.png", // update if different
+};
+
+const finalTitle = seo.title ? `${seo.title} | ${site.name}` : title;
+const finalDesc = seo.description ?? description;
+
+const canonical =
+  seo.canonical ??
+  `${site.url}${Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "")}`;
+
+const ogImage = seo.image ?? site.socialImage;
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NonprofitOrganization",
+  name: site.name,
+  url: site.url,
+  logo: site.logo,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Core -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={site.themeColor} />
+    <title>{finalTitle}</title>
+    <meta name="description" content={finalDesc} />
+    <link rel="canonical" href={canonical} />
+    {seo.noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={finalDesc} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={finalTitle} />
+    <meta name="twitter:description" content={finalDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicons (drop files in /public) -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">{JSON.stringify(orgJsonLd)}</script>
+
+    <!-- Baseline polish -->
+    <style>
+      :root { color-scheme: light; }
+      html:focus-within { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html:focus-within { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+
+  <body id="top" class="min-h-screen bg-white text-slate-900 antialiased">
+    <!-- Skip link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg focus:ring-2 focus:ring-[#e01b24]"
+    >
+      Skip to content
+    </a>
+
+    <Navbar />
+
+    <main
+      id="main-content"
+      class:list={[
+        "mx-auto w-full max-w-6xl px-6",
+        hero ? "pt-6 pb-16" : "pt-8 pb-16",
+        className,
+      ]}
+    >
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

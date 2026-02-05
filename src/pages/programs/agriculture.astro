@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/shared/Hero.astro";
+import GrowingFeedingCommunitiesSection from "../../components/programs/Agriculture.astro";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Agriculture & Food Security",
+    description:
+      "Fighting hunger and building sustainable communities in Tanzania through faith-based agriculture and training.",
+  }}
+>
+  <Hero
+    heading="Agriculture & Food Security"
+    subheading="Growing food, restoring dignity, and building sustainable communities rooted in faith."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/feeding3.jpeg"
+  />
+
+  <GrowingFeedingCommunitiesSection />
+</BaseLayout>

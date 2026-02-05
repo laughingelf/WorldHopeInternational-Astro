@@ -1,0 +1,235 @@
+---
+const conferenceFeatures = [
+  "A week of intensive biblical and leadership training",
+  "Access to discipleship tools and ministry resources",
+  "Fellowship, encouragement, and prayer",
+  "A path to return equipped to serve and lead effectively",
+];
+
+const outcomes = [
+  "Stronger biblical teaching in local churches",
+  "Healthier church leadership and discipleship pathways",
+  "Contextualized ministry that serves real community needs",
+  "Multiplication as trained pastors equip others",
+];
+
+const threeYearPlan = [
+  {
+    title: "Year 1: Foundations",
+    points: ["Core biblical theology", "Hermeneutics & sermon prep", "Personal spiritual formation"],
+  },
+  {
+    title: "Year 2: Shepherding & Mission",
+    points: ["Pastoral care & counseling", "Evangelism & community outreach", "Church health & governance"],
+  },
+  {
+    title: "Year 3: Leadership & Multiplication",
+    points: ["Leadership development & team building", "Discipleship systems", "Capstone project & Certificate of Completion"],
+  },
+];
+---
+
+<section class="pastor-section">
+  <!-- Intro -->
+  <div class="wrap reveal" data-reveal="up">
+    <p class="p">
+      In addition to educating children, Word Hope is passionate about strengthening the church
+      through local pastors. Many serve without formal training or resources, yet lead growing
+      congregations in spiritually hungry communities.
+    </p>
+    <p class="p">
+      To equip these leaders, Pastor’s Conferences will be held twice a year at the Word Hope Campus.
+    </p>
+  </div>
+
+  <!-- Conferences Overview -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <img
+        src="/img/pastor1.jpg"
+        alt="Pastors gathered for training"
+        class="img"
+        loading="lazy"
+      />
+
+      <div>
+        <h2 class="h2 center">Bi-Annual Pastor’s Conferences</h2>
+        <ul class="ul">
+          {conferenceFeatures.map((f) => <li>{f}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Led by Greg Buckles -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <div>
+        <h2 class="h2 center">Led by Greg Buckles</h2>
+        <p class="p">
+          These training efforts are led by <strong>Greg Buckles</strong>, a partner with Word Hope
+          International and Senior Staff with Global Training Network. Greg holds a ThM from Dallas
+          Theological Seminary and brings over 40 years of pastoral experience with a deep passion
+          for equipping indigenous leaders.
+        </p>
+        <ul class="ul">
+          <li>Biblical depth</li>
+          <li>Cultural understanding</li>
+          <li>Spiritual mentorship</li>
+        </ul>
+      </div>
+
+      <img
+        src="/img/pastor2.jpg"
+        alt="Greg Buckles teaching"
+        class="img"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- Three-Year Program -->
+  <div class="wrap section reveal" data-reveal="up">
+    <h2 class="h2 center">Three-Year Training Path</h2>
+
+    <div class="years">
+      {threeYearPlan.map((year) => (
+        <div class="year-card">
+          <h3 class="h3 center">{year.title}</h3>
+          <ul class="ul">
+            {year.points.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <p class="p center" style="margin-top: 1.5rem;">
+      The training is structured as a three-year program, culminating in a <strong>Certificate of Completion</strong> for each pastor.
+    </p>
+  </div>
+
+  <!-- Outcomes -->
+  <div class="wrap section reveal" data-reveal="up">
+    <h2 class="h2 center">What This Produces</h2>
+
+    <ul class="outcomes">
+      {outcomes.map((o) => (
+        <li class="outcome">
+          <span class="check">✅</span>
+          <span>{o}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Quote + CTA -->
+  <div class="wrap section reveal center" data-reveal="up">
+    <blockquote class="quote">
+      “Education is the most powerful weapon which you can use to change the world.” — Nelson Mandela
+    </blockquote>
+
+    <div class="cta">
+      <a href="/donate" class="btn-primary">Support Pastor Training</a>
+      <a href="/contact" class="btn-outline">Ask About Conferences</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pastor-section { padding: 4rem 1.5rem; background: #ffffff; }
+  .wrap { max-width: 72rem; margin: 0 auto; }
+  .section { margin-top: 3.5rem; }
+  .center { text-align: center; }
+
+  .p { color: #4d7c59; line-height: 1.65; margin-bottom: 1rem; }
+
+  .h2 { font-size: 1.7rem; font-weight: 900; color: #14532d; margin-bottom: 1rem; }
+  .h3 { font-size: 1.25rem; font-weight: 800; color: #14532d; margin-bottom: .75rem; }
+
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 2rem; }
+  }
+
+  .img {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    object-position: center 25%;
+    border-radius: .75rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  }
+
+  .ul { list-style: disc; padding-left: 1.25rem; color: #4d7c59; line-height: 1.6; }
+
+  .years {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .years { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .year-card {
+    background: #ffffff;
+    border: 1px solid rgba(20,83,45,.12);
+    border-radius: .75rem;
+    padding: 1.5rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  }
+
+  .outcomes {
+    display: grid;
+    gap: .75rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 768px) {
+    .outcomes { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .outcome {
+    display: flex;
+    gap: .5rem;
+    align-items: flex-start;
+    color: #4d7c59;
+    line-height: 1.6;
+  }
+  .check { margin-top: .1rem; }
+
+  .quote {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #14532d;
+    margin: 0 auto 1.5rem;
+    max-width: 48rem;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .btn-primary {
+    background: #e01b24;
+    color: #ffffff;
+    padding: .75rem 1.5rem;
+    border-radius: .5rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .btn-outline {
+    border: 2px solid #e01b24;
+    color: #e01b24;
+    padding: .75rem 1.5rem;
+    border-radius: .5rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/shared/Hero.astro";
+import EducationAndLeadershipSection from "../../components/programs/Education.astro";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Education",
+    description:
+      "Changing futures through Christ-centered education and leadership development across Tanzania.",
+  }}
+>
+  <Hero
+    heading="Education"
+    subheading="Changing futures through Christ-centered education and leadership development."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/education-hero.jpeg"
+  />
+
+  <EducationAndLeadershipSection />
+</BaseLayout>

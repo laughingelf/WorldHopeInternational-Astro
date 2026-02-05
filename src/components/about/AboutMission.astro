@@ -1,0 +1,143 @@
+---
+const content = {
+  heading: "Our Mission & Vision",
+  p1:
+    "Word Hope International exists to bring holistic transformation to communities across Tanzania through the love of Christ. We are committed to alleviating hunger, providing quality education, increasing access to medical care, and empowering local leaders through sustainable development and biblical training.",
+  p2:
+    "Through partnerships, outreach, and prayerful service, we aim to restore dignity, cultivate hope, and build thriving communities for the glory of God.",
+  image: {
+    src: "/img/about-mission.jpeg",
+    alt: "Outreach in Tanzania",
+  },
+};
+---
+
+<section class="about-mission">
+  <div class="about-mission__inner">
+    <!-- Left: Mission Text -->
+    <div class="about-mission__text reveal" data-reveal="left">
+      <h2>{content.heading}</h2>
+      <p class="lead">{content.p1}</p>
+      <p class="muted">{content.p2}</p>
+    </div>
+
+    <!-- Right: Image -->
+    <div class="about-mission__image reveal" data-reveal="right" style="--d:120ms;">
+      <img
+        src={content.image.src}
+        alt={content.image.alt}
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const els = document.querySelectorAll(".reveal");
+
+  if (!prefersReduced) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add("is-visible"));
+  }
+</script>
+
+<style>
+  .about-mission {
+    background: #ffffff;
+    padding: 5rem 1.5rem;
+  }
+
+  .about-mission__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .about-mission__inner {
+      flex-direction: row;
+      gap: 4rem;
+    }
+  }
+
+  .about-mission__text {
+    flex: 1;
+  }
+
+  .about-mission__text h2 {
+    font-size: clamp(1.9rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: #14532d;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-mission__text .lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #166534;
+    margin-bottom: 1rem;
+  }
+
+  .about-mission__text .muted {
+    color: #4d7c59;
+    line-height: 1.6;
+  }
+
+  .about-mission__image {
+    flex: 1;
+    width: 100%;
+  }
+
+  .about-mission__image img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: var(--d, 0ms);
+  }
+
+  .reveal[data-reveal="left"] {
+    transform: translateX(-36px);
+  }
+
+  .reveal[data-reveal="right"] {
+    transform: translateX(36px);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

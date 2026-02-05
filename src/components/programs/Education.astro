@@ -1,0 +1,263 @@
+---
+const educators = [
+  {
+    name: "Sharon Prince",
+    creds: "M.A. in Early Childhood Education, Retired Librarian",
+  },
+  {
+    name: "Tammy Ledesma",
+    creds: "B.S. in Elementary Education & M.S. in Library Science, Retired",
+  },
+  {
+    name: "Lesley Norris",
+    creds: "B.S. in Elementary Education (Math emphasis) & M.A. in Library Science",
+  },
+  {
+    name: "Susan Buckles",
+    creds: "B.S. in Education, Retired",
+  },
+];
+
+const curriculumPoints = [
+  "Aligns with Tanzanian national education guidelines",
+  "Offers a holistic approach, spiritual, academic, emotional, and social",
+  "Builds literacy, numeracy, leadership, and life skills",
+  "Integrates Biblical values into daily lessons",
+  "Prepares students to contribute meaningfully to their communities",
+];
+
+const leadershipPoints = [
+  "Service-based learning",
+  "Civic responsibility",
+  "Spiritual formation & faith-building",
+];
+---
+
+<section class="education-section">
+  <!-- Intro -->
+  <div class="wrap reveal" data-reveal="up">
+    <h2 class="h2">📚 Educational &amp; Leadership Development</h2>
+    <p class="kicker">
+      <strong>Changing Futures Through Christ-Centered Education</strong>
+    </p>
+    <p class="p">
+      In the villages surrounding Word Hope International’s campus,
+      <strong>
+        more than 50% of children between the ages of 4 and 18 have never attended a
+        single day of school.
+      </strong>
+      This heartbreaking reality represents not only a lack of education but also a loss
+      of potential, opportunity, and hope. Word Hope is committed to changing that.
+    </p>
+  </div>
+
+  <!-- A School for the Forgotten -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <img
+        src="/img/education1.jpeg"
+        alt="Children learning in a classroom"
+        class="img"
+        loading="lazy"
+      />
+      <div>
+        <h3 class="h3">🎓 A School for the Forgotten</h3>
+        <p class="p">
+          Plans are underway to establish a school on the Word Hope campus, a place where
+          children left behind by traditional systems will find a new beginning. This school
+          will offer access to quality education in a nurturing, Christ-centered environment
+          that empowers students to:
+        </p>
+        <ul class="ul">
+          <li>Discover their God-given purpose and find passion in learning</li>
+          <li>
+            Unlock their educational potential by nurturing students academically, emotionally,
+            socially, and spiritually
+          </li>
+          <li>Rise above generational poverty and provide strength and encouragement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guided by Passionate Educators -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <div>
+        <h3 class="h3">🧠 Guided by Passionate Educators</h3>
+        <p class="p">
+          To ensure excellence from the ground up, a team of experienced educators is actively
+          overseeing the development of the school. These leaders bring decades of expertise in
+          early childhood education, library sciences, and classroom instruction:
+        </p>
+        <ul class="educators">
+          {educators.map((e) => (
+            <li>
+              <p class="strong">{e.name}</p>
+              <p class="small">{e.creds}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="p">
+          Their guidance ensures the future school will be academically strong, spiritually
+          grounded, and developmentally appropriate for students of all ages.
+        </p>
+      </div>
+
+      <img
+        src="/img/education2.jpeg"
+        alt="Educators collaborating"
+        class="img"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- Curriculum -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <img
+        src="/img/education3.jpeg"
+        alt="Students reading and writing"
+        class="img"
+        loading="lazy"
+      />
+      <div>
+        <h3 class="h3">📘 Curriculum with a Purpose</h3>
+        <p class="p">
+          We are in the early stages of curriculum development, working with local and
+          international partners to ensure that our program:
+        </p>
+        <ul class="ul">
+          {curriculumPoints.map((point) => (
+            <li>{point}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developing Leaders -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <div>
+        <h3 class="h3">🧑‍🏫 Developing Future Leaders</h3>
+        <p class="p">
+          Education at Word Hope is more than academics. It is about raising leaders for
+          tomorrow. Through our programs, students will grow in character, courage, and
+          calling. Leadership development will include:
+        </p>
+        <ul class="ul">
+          {leadershipPoints.map((point) => (
+            <li>{point}</li>
+          ))}
+        </ul>
+      </div>
+
+      <img
+        src="/img/education4.jpeg"
+        alt="Student leaders serving community"
+        class="img"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .education-section {
+    background: #ffffff;
+    padding: 4rem 1.5rem;
+  }
+
+  .wrap {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin-top: 3.5rem;
+  }
+
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+  }
+
+  .h2 {
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
+    font-weight: 900;
+    color: #14532d;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #14532d;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .kicker {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: #166534;
+    text-align: center;
+  }
+
+  .p {
+    color: #4d7c59;
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    color: #4d7c59;
+    line-height: 1.6;
+  }
+
+  .educators {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .educators li {
+    border: 1px solid rgba(20, 83, 45, 0.12);
+    background: #f0fdf4;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .strong {
+    font-weight: 700;
+    color: #14532d;
+  }
+
+  .small {
+    font-size: 0.9rem;
+    color: #4d7c59;
+  }
+
+  .img {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    object-position: center 25%;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  }
+</style>

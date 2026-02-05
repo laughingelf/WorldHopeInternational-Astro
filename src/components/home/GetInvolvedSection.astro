@@ -1,0 +1,109 @@
+---
+const involvementOptions = [
+  {
+    title: "Give",
+    desc: "Support clinics, farming projects, and education through one-time or recurring donations.",
+    button: "Donate Now",
+    link: "/donate",
+  },
+  {
+    title: "Sponsor",
+    desc: "Become a monthly partner and walk alongside a community long-term.",
+    button: "Become a Sponsor",
+    link: "/donate#monthly",
+  },
+  {
+    title: "Pray",
+    desc: "Join us in prayer for the people we serve and the mission ahead.",
+    button: "Prayer Requests",
+    link: "/contact",
+  },
+  {
+    title: "Volunteer",
+    desc: "Help in-person or remotely. Let’s talk about how you can serve.",
+    button: "Get Involved",
+    link: "/contact",
+  },
+];
+---
+
+<section class="bg-white py-20 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-green-900 mb-6 reveal" data-reveal="up">
+      Get Involved
+    </h2>
+
+    <p
+      class="text-lg text-green-800 max-w-2xl mx-auto mb-12 reveal"
+      data-reveal="up"
+      style="--reveal-delay: 80ms;"
+    >
+      Whether you're looking to donate, sponsor, pray, or serve, there’s a place for you to be part
+      of what God is doing through Word Hope International.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+      {involvementOptions.map((item, index) => (
+        <div
+          class="bg-green-50 p-6 rounded-md shadow hover:shadow-md transition reveal"
+          data-reveal="up"
+          style={`--reveal-delay: ${index * 90}ms;`}
+        >
+          <h3 class="text-xl font-semibold text-green-900 mb-2">{item.title}</h3>
+          <p class="text-green-700 mb-4">{item.desc}</p>
+
+          <a
+            href={item.link}
+            class="inline-block bg-[#e01b24] hover:bg-red-800 text-white px-5 py-2 rounded-md text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-[#e01b24]/40 focus:ring-offset-2"
+          >
+            {item.button}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const els = document.querySelectorAll(".reveal");
+  if (!prefersReduced) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add("is-visible"));
+  }
+</script>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

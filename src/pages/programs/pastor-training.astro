@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/shared/Hero.astro";
+import PastorTrainingSection from "../../components/programs/PastorTraining.astro";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Pastoral Training",
+    description:
+      "Strengthening the church by equipping pastors with biblical depth, leadership skills, and practical ministry tools in Tanzania.",
+  }}
+>
+  <Hero
+    heading="Pastoral Training & Equipping Local Leaders"
+    subheading="Strengthening the church by equipping pastors with biblical depth, leadership skills, and practical tools."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/pastorHero.jpg"
+  />
+
+  <PastorTrainingSection />
+</BaseLayout>

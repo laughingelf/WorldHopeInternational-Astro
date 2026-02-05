@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/shared/Hero.astro";
+import ProjectUpdate from "../components/project-updates/ProjectUpdates.astro";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Project Updates",
+    description:
+      "Track progress across Word Hope International’s farmland and community-building initiatives in Chemba, Tanzania.",
+  }}
+>
+  <Hero
+    heading="Project Updates"
+    subheading="Track the journey step by step and see how your support is turning vision into reality in Chemba, Tanzania."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/hero-bg.jpeg"
+  />
+
+  <ProjectUpdate lastUpdated="February 2026" />
+</BaseLayout>

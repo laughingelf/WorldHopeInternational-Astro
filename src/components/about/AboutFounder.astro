@@ -1,0 +1,149 @@
+---
+const content = {
+  heading: "Meet Our Founder",
+  p1:
+    "Word Hope International was born from a vision to uplift Tanzanian communities through compassion, sustainability, and faith.",
+  p2:
+    "With years of outreach experience and deep partnerships on the ground, our founder stepped into action to meet urgent needs including medical, agricultural, educational, and spiritual support.",
+  p3:
+    "Today, that vision continues to grow through faithful partnerships, hands-on service, and a commitment to restoring hope where it’s needed most.",
+  image: {
+    src: "/img/founder.jpeg",
+    alt: "Founder of Word Hope",
+  },
+};
+---
+
+<section class="about-founder">
+  <div class="about-founder__inner">
+    <!-- Image -->
+    <div class="about-founder__image reveal" data-reveal="left">
+      <img
+        src={content.image.src}
+        alt={content.image.alt}
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Text Content -->
+    <div class="about-founder__text reveal" data-reveal="right" style="--d:120ms;">
+      <h2>{content.heading}</h2>
+      <p class="lead">{content.p1}</p>
+      <p class="body">{content.p2}</p>
+      <p class="body">{content.p3}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const els = document.querySelectorAll(".reveal");
+
+  if (!prefersReduced) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add("is-visible"));
+  }
+</script>
+
+<style>
+  .about-founder {
+    background: #ecfdf5; /* green-50 vibe */
+    padding: 5rem 1.5rem;
+  }
+
+  .about-founder__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .about-founder__inner {
+      flex-direction: row;
+      gap: 4rem;
+    }
+  }
+
+  .about-founder__image {
+    flex: 1;
+    width: 100%;
+  }
+
+  .about-founder__image img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  object-position: center 10%;
+  border-radius: 0.5rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+
+  .about-founder__text {
+    flex: 1;
+  }
+
+  .about-founder__text h2 {
+    font-size: clamp(1.9rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: #14532d;
+    margin-bottom: 1rem;
+  }
+
+  .about-founder__text .lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #166534;
+    margin-bottom: 1rem;
+  }
+
+  .about-founder__text .body {
+    color: #4d7c59;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: var(--d, 0ms);
+  }
+
+  .reveal[data-reveal="left"] {
+    transform: translateX(-36px);
+  }
+
+  .reveal[data-reveal="right"] {
+    transform: translateX(36px);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

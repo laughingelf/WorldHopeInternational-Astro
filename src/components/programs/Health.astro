@@ -1,0 +1,236 @@
+---
+const highlights = [
+  {
+    title: "Permanent Medical Clinic",
+    text:
+      "Staffed by American and African healthcare professionals, our clinic provides ongoing access to essential care for hundreds of families year-round.",
+  },
+  {
+    title: "Annual Bush Clinics",
+    text:
+      "Each summer, mobile teams venture into remote villages to offer free check-ups, treatments, and medicine, bringing care to those who would otherwise go without.",
+  },
+  {
+    title: "Healing with Purpose",
+    text:
+      "We combine physical care with spiritual encouragement, praying with patients and sharing the love of Christ in every interaction.",
+  },
+];
+
+const bushClinicServices = [
+  "Free medical treatment",
+  "Health checkups",
+  "Essential medicines",
+  "Health education",
+  "Spiritual encouragement and prayer",
+];
+
+const yearRoundServices = [
+  "Primary care",
+  "Maternal and child health",
+  "Chronic disease management",
+  "Vaccinations and preventative care",
+  "Health and wellness education",
+];
+---
+
+<section class="health-section">
+  <!-- Intro -->
+  <div class="wrap reveal" data-reveal="up">
+    <h2 class="h2">Word Hope International</h2>
+    <p class="p center">
+      Word Hope International is committed to bringing compassionate, Christ-centered
+      healthcare to underserved communities in the African bush. Through the Health and
+      Healing Clinics, we aim to bridge the gap between urgent medical needs and long-term,
+      high-quality care.
+    </p>
+  </div>
+
+  <!-- Vision -->
+  <div class="wrap section reveal" data-reveal="up">
+    <h3 class="h3 center">🌿 Our Vision</h3>
+    <p class="p center">
+      To bring physical and spiritual healing by providing year-round and mobile medical care,
+      building strong community relationships, and sharing the love of Jesus.
+    </p>
+  </div>
+
+  <!-- Highlights -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="cards">
+      {highlights.map((item) => (
+        <div class="card">
+          <h4>{item.title}</h4>
+          <p>{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bush Clinics -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <img
+        src="/img/medical1.jpeg"
+        alt="Mobile clinic serving a rural village"
+        class="img img--focus"
+        loading="lazy"
+      />
+      <div>
+        <h3 class="h3">🚐 Bush Clinics</h3>
+        <p class="p">
+          Each year, American doctors and medical volunteers travel with Word Hope to provide
+          mobile clinics in rural areas. These clinics offer:
+        </p>
+        <ul class="ul">
+          {bushClinicServices.map((s) => <li>{s}</li>)}
+        </ul>
+        <p class="strong">Led by:</p>
+        <ul class="plain">
+          <li>Dr. Anna Nelson (MD, USA)</li>
+          <li>Dr. Carey Nelson (MD, USA)</li>
+        </ul>
+        <p class="p">
+          They oversee the planning and care to ensure each clinic provides quality service
+          and consistent follow-up.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Year-Round Clinic -->
+  <div class="wrap section reveal" data-reveal="up">
+    <div class="grid">
+      <div>
+        <h3 class="h3">🏥 Year-Round Medical Clinic</h3>
+        <p class="italic">Opening Summer 2026 on the Word Hope campus</p>
+        <p class="p">
+          Our permanent medical clinic will provide daily care to the community, offering:
+        </p>
+        <ul class="ul">
+          {yearRoundServices.map((s) => <li>{s}</li>)}
+        </ul>
+        <p class="strong">Staffed by:</p>
+        <ul class="plain">
+          <li>Dr. Joseph Sironga (MD, Africa)</li>
+          <li>Dr. Fides Maleo (MD, Africa)</li>
+        </ul>
+        <p class="p">
+          These dedicated African physicians bring a deep understanding of local needs and
+          a heart for Christ-centered care.
+        </p>
+      </div>
+      <img
+        src="/img/medical2.jpeg"
+        alt="Clinic facility and community care"
+        class="img img--focus"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- Sustainable Impact -->
+  <div class="wrap section reveal" data-reveal="up">
+    <h3 class="h3">🌍 Sustainable Impact</h3>
+    <p class="p">
+      Our clinics are more than a medical service. They are a ministry. We believe every
+      patient deserves to be treated with love, dignity, and compassion. By partnering
+      African and American doctors, we are building a sustainable and locally driven
+      healthcare model.
+    </p>
+  </div>
+
+  <!-- Scripture + Help -->
+  <div class="wrap section reveal center" data-reveal="up">
+    <blockquote class="quote">
+      “When Jesus landed and saw a large crowd, he had compassion on them and healed their
+      sick.” — Matthew 14:14
+    </blockquote>
+
+    <h3 class="h3">🙏 How You Can Help</h3>
+    <ul class="checklist">
+      <li>Donate medical supplies</li>
+      <li>Sponsor a mobile clinic trip</li>
+      <li>Give toward the new clinic building</li>
+      <li>Pray for our doctors and volunteers</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .health-section { padding: 4rem 1.5rem; background: #fff; }
+  .wrap { max-width: 72rem; margin: 0 auto; }
+  .section { margin-top: 3.5rem; }
+
+  .center { text-align: center; }
+  .h2 { font-size: 2.25rem; font-weight: 900; color: #14532d; margin-bottom: 1rem; text-align: center; }
+  .h3 { font-size: 1.6rem; font-weight: 800; color: #14532d; margin-bottom: .5rem; text-align: center; }
+  .p { color: #4d7c59; line-height: 1.65; margin-bottom: 1rem; }
+  .strong { font-weight: 700; color: #14532d; margin-top: .5rem; }
+  .italic { font-style: italic; color: #4d7c59; margin-bottom: .75rem; }
+
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  .cards {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .cards { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .card {
+    padding: 1.5rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(20,83,45,.12);
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.06);
+    text-align: center;
+  }
+
+  .card h4 { font-size: 1.1rem; font-weight: 800; color: #14532d; margin-bottom: .5rem; }
+
+  .ul { list-style: disc; padding-left: 1.25rem; color: #4d7c59; margin-bottom: 1rem; }
+  .plain { list-style: none; padding: 0; margin: 0 0 1rem; color: #4d7c59; }
+
+  .img {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    object-position: center 25%;
+    border-radius: .5rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  }
+
+  .quote {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #14532d;
+    margin-bottom: 1.5rem;
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: .5rem;
+    max-width: 36rem;
+    margin: 0 auto;
+    text-align: center;
+    color: #4d7c59;
+  }
+
+  .checklist li::before {
+    content: "✓ ";
+    color: #e01b24;
+    font-weight: 700;
+  }
+</style>

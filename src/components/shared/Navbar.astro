@@ -1,0 +1,171 @@
+---
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Programs", href: "/programs" },
+  { name: "Project Updates", href: "/project-updates" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Donate", href: "/donate" },
+  { name: "Contact", href: "/contact" },
+];
+
+// Auto-highlight active link (Astro gives you the current URL)
+const pathname = Astro.url.pathname;
+const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+---
+
+<header class="bg-white/90 shadow-sm fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo / Site Name -->
+    <a href="/" class="text-xl font-bold text-green-900 tracking-tight">
+      Word Hope International
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-6" aria-label="Primary">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "text-green-800 transition font-medium",
+            "hover:text-[#e01b24]",
+            isActive(link.href) ? "text-[#e01b24]" : "",
+          ]}
+          aria-current={isActive(link.href) ? "page" : undefined}
+        >
+          {link.name}
+        </a>
+      ))}
+      <!-- Optional: modern “button” styling for Donate -->
+      <a
+        href="/donate"
+        class="ml-2 hidden lg:inline-flex items-center rounded-full bg-[#e01b24] px-4 py-2 text-white font-semibold shadow-sm hover:opacity-90 transition"
+      >
+        Donate
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="nav-toggle"
+      class="md:hidden inline-flex items-center justify-center rounded-xl p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e01b24]"
+      aria-label="Toggle Menu"
+      aria-controls="mobile-nav"
+      aria-expanded="false"
+      type="button"
+    >
+      <!-- Hamburger -->
+      <svg id="icon-hamburger" class="w-6 h-6 text-green-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+
+      <!-- X -->
+      <svg id="icon-close" class="w-6 h-6 text-green-900 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div
+    id="mobile-nav"
+    class="md:hidden overflow-hidden border-t border-gray-100 bg-white shadow-sm"
+    hidden
+  >
+    <nav class="px-6 pt-4 pb-6 space-y-2" aria-label="Mobile Primary">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "block rounded-xl px-3 py-2 text-green-800 font-medium transition",
+            "hover:bg-gray-50 hover:text-[#e01b24]",
+            isActive(link.href) ? "text-[#e01b24] bg-gray-50" : "",
+          ]}
+        >
+          {link.name}
+        </a>
+      ))}
+      <a
+        href="/donate"
+        class="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-[#e01b24] px-4 py-3 text-white font-semibold shadow-sm hover:opacity-90 transition"
+      >
+        Donate
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer so fixed header doesn't cover content -->
+<div class="h-[72px]"></div>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const panel = document.getElementById("mobile-nav");
+  const hamburger = document.getElementById("icon-hamburger");
+  const closeIcon = document.getElementById("icon-close");
+
+  let open = false;
+
+  function setOpen(next) {
+    open = next;
+    toggle?.setAttribute("aria-expanded", String(open));
+    if (!panel) return;
+
+    // swap icons
+    hamburger?.classList.toggle("hidden", open);
+    closeIcon?.classList.toggle("hidden", !open);
+
+    if (open) {
+      panel.hidden = false;
+      panel.classList.add("nav-enter");
+      panel.classList.remove("nav-exit");
+    } else {
+      panel.classList.add("nav-exit");
+      panel.classList.remove("nav-enter");
+      // wait for animation to end before hiding
+      const onEnd = () => {
+        panel.hidden = true;
+        panel.removeEventListener("animationend", onEnd);
+      };
+      panel.addEventListener("animationend", onEnd);
+    }
+  }
+
+  toggle?.addEventListener("click", () => setOpen(!open));
+
+  // Close on link click (mobile)
+  panel?.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target && target.tagName === "A") setOpen(false);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && open) setOpen(false);
+  });
+</script>
+
+<style>
+  /* Subtle 2026-feel dropdown motion without JS libs */
+  .nav-enter {
+    animation: navDown 220ms ease-out forwards;
+    transform-origin: top;
+  }
+  .nav-exit {
+    animation: navUp 180ms ease-in forwards;
+    transform-origin: top;
+  }
+  @keyframes navDown {
+    from { opacity: 0; transform: translateY(-6px) scaleY(0.98); }
+    to   { opacity: 1; transform: translateY(0) scaleY(1); }
+  }
+  @keyframes navUp {
+    from { opacity: 1; transform: translateY(0) scaleY(1); }
+    to   { opacity: 0; transform: translateY(-6px) scaleY(0.98); }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .nav-enter, .nav-exit { animation: none !important; }
+  }
+</style>

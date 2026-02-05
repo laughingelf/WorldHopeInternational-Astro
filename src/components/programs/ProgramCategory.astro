@@ -1,0 +1,166 @@
+---
+const programCategories = [
+  {
+    title: "Education",
+    description:
+      "Building schools, providing supplies, and supporting students from primary through vocational training.",
+    image: "/img/education2.jpeg",
+    link: "/programs/education",
+  },
+  {
+    title: "Health",
+    description:
+      "Mobile clinics, basic healthcare access, and health education for rural communities.",
+    image: "/img/clinic-img.jpeg",
+    link: "/programs/health",
+  },
+  {
+    title: "Agriculture",
+    description:
+      "Sustainable farming training, seed support, and community gardens to improve food security.",
+    image: "/img/feeding.jpeg",
+    link: "/programs/agriculture",
+  },
+  {
+    title: "Pastor Training",
+    description:
+      "Equipping local pastors with biblical training, leadership development, and practical ministry tools.",
+    image: "/img/PTraining1.jpg",
+    link: "/programs/pastor-training",
+  },
+];
+---
+
+<section class="program-categories">
+  <div class="program-categories__grid">
+    {programCategories.map((program) => (
+      <a href={program.link} class="program-card" aria-label={`Learn more about ${program.title}`}>
+        <img
+          src={program.image}
+          alt={`${program.title} program`}
+          loading="lazy"
+        />
+
+        <h3>{program.title}</h3>
+        <p>{program.description}</p>
+
+        <span class="program-card__cta">Learn more →</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .program-categories {
+    background: #ffffff;
+    padding: 4rem 1.5rem;
+  }
+
+  .program-categories__grid {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .program-categories__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .program-categories__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .program-card {
+    display: block;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 200ms ease, transform 200ms ease, outline-color 200ms ease;
+  }
+
+  .program-card:hover {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.10);
+    transform: translateY(-2px);
+  }
+
+  .program-card:focus-visible {
+    outline: 3px solid rgba(224, 27, 36, 0.35);
+    outline-offset: 4px;
+  }
+
+  .program-card img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    transition: transform 300ms ease;
+  }
+
+  .program-card:hover img {
+    transform: scale(1.04);
+  }
+
+  .program-card h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #14532d;
+    margin-bottom: 0.5rem;
+    transition: color 200ms ease;
+  }
+
+  .program-card:hover h3 {
+    color: #e01b24;
+  }
+
+  .program-card p {
+    color: #4d7c59;
+    line-height: 1.5;
+    margin-bottom: 0.25rem;
+  }
+
+  .program-card__cta {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-weight: 800;
+    color: #14532d;
+    opacity: 0.75;
+    transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+  }
+
+  .program-card:hover .program-card__cta {
+    opacity: 1;
+    color: #e01b24;
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .program-card,
+    .program-card img,
+    .program-card__cta {
+      transition: none !important;
+    }
+
+    .program-card:hover {
+      transform: none;
+    }
+
+    .program-card:hover img {
+      transform: none;
+    }
+  }
+</style>

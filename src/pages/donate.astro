@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/shared/Hero.astro";
+import DonateIsland from "../components/islands/DonateIsland.jsx";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Donate",
+    description:
+      "Support Word Hope International’s mission in Tanzania through one-time or monthly giving.",
+  }}
+>
+  <Hero
+    heading="Donate"
+    subheading="Your generosity supports medical care, education, sustainable agriculture, and spiritual outreach in Tanzania."
+    primaryCtaText="Give Now"
+    primaryCtaLink="#donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/hero-bg.jpeg"
+  />
+
+  <div id="donate">
+    <DonateIsland client:load />
+  </div>
+</BaseLayout>

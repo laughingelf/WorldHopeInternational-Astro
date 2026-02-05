@@ -1,0 +1,137 @@
+---
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Donate", href: "/donate" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
+];
+
+const socials = [
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61578211120019",
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/wordhopeint/",
+  },
+];
+---
+
+<footer class="bg-green-900 text-white">
+  <div class="px-6 md:px-12 py-12">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Left: Organization Info -->
+      <div>
+        <h3 class="text-xl font-bold mb-2">Word Hope International</h3>
+        <p class="text-sm text-green-200 mb-3">
+          Serving communities through faith, compassion, and sustainable outreach.
+        </p>
+
+        <!-- 501(c)(3) Statement -->
+        <p class="text-xs text-green-300 leading-relaxed">
+          Word Hope International is a registered
+          <span class="font-semibold text-green-100"> 501(c)(3) nonprofit organization</span>.
+          Donations are tax-deductible as allowed by law.
+        </p>
+
+        <!-- Optional quick conversion nudge -->
+        <div class="mt-5">
+          <a
+            href="/donate"
+            class="inline-flex items-center justify-center rounded-xl bg-[#e01b24] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          >
+            Donate
+          </a>
+        </div>
+      </div>
+
+      <!-- Middle: Navigation Links -->
+      <div>
+        <h4 class="text-md font-semibold mb-3">Quick Links</h4>
+        <ul class="space-y-1 text-sm text-green-100">
+          {quickLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "hover:text-white transition",
+                  link.name === "Donate" ? "font-semibold text-white" : "",
+                ]}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href="#top"
+          class="mt-5 inline-flex text-sm text-green-200 underline decoration-green-200/60 underline-offset-4 hover:text-white transition"
+        >
+          Back to top
+        </a>
+      </div>
+
+      <!-- Right: Contact Info / Social -->
+      <div>
+        <h4 class="text-md font-semibold mb-3">Contact</h4>
+
+        <p class="mb-1 text-sm text-green-100">
+          Email:
+          <a
+            href="mailto:wordhopeint@gmail.com"
+            class="ml-1 underline underline-offset-4 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
+          >
+            wordhopeint@gmail.com
+          </a>
+        </p>
+
+        <p class="mb-4 text-sm text-green-100">
+          Phone:
+          <a
+            href="tel:+18175048915"
+            class="ml-1 underline underline-offset-4 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
+          >
+            +1 (817) 504-8915
+          </a>
+        </p>
+
+        <div class="flex gap-4 text-sm">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              class="text-green-200 hover:text-white transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-10 border-t border-green-800 pt-6 text-center text-xs text-green-300">
+      <div>
+        &copy; {year} Word Hope International. All rights reserved.
+      </div>
+
+      <div class="mt-2 opacity-80">
+        Website by{" "}
+        <a
+          href="https://ghoststackdesigns.com"
+          class="underline underline-offset-4 hover:text-white transition"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GhostStack Designs
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

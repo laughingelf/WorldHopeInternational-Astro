@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/shared/Hero.astro";
+import AboutMission from "../components/about/AboutMission.astro";
+import AboutFounder from "../components/about/AboutFounder.astro"
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "About",
+    description: "Learn about the mission, leadership, and heart behind Word Hope International.",
+  }}
+>
+  <Hero
+    heading="About Word Hope International"
+    subheading="Discover the mission, the people, and the heart behind Word Hope International."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/about-hero.jpeg"
+  />
+
+  <AboutMission/>
+  <AboutFounder/>
+
+  
+</BaseLayout>

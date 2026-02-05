@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/shared/Hero.astro";
+import ProgramCategory from "../components/programs/ProgramCategory.astro";
+import CallToAction from "../components/shared/CallToAction.astro"
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Our Programs",
+    description:
+      "From healing bodies to feeding families and equipping future leaders, discover how Word Hope International is making a lasting impact across Tanzania.",
+  }}
+>
+  <Hero
+    heading="Our Programs"
+    subheading="From healing bodies to feeding families and equipping future leaders, discover how Word Hope International is making a lasting impact across Tanzania."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/programs.jpeg"
+  />
+
+  <ProgramCategory/>
+  <CallToAction/>
+
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/shared/Hero.astro";
+import GalleryIsland from "../components/islands/GalleryIsland.jsx";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Gallery",
+    description:
+      "View photos from Word Hope International’s clinics, schools, farms, and ministry outreach in Tanzania.",
+  }}
+>
+  <Hero
+    heading="Gallery"
+    subheading="Moments from clinics, schools, farms, and ministry in the community."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/pastor.jpg"
+  />
+
+  <GalleryIsland client:load />
+</BaseLayout>

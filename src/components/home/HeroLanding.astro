@@ -1,0 +1,124 @@
+---
+/*
+  Home Hero
+  - Fully static Astro component
+  - No React, no hydration
+  - Motion handled via CSS (2026-friendly)
+*/
+---
+
+<section class="relative overflow-hidden py-16 px-6 md:px-12">
+  <!-- Background image -->
+  <img
+    src="/img/hero-bg.jpeg"
+    alt="Hope and outreach in Africa"
+    class="absolute inset-0 z-0 h-full w-full object-cover opacity-50"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <!-- Soft overlay -->
+  <div class="absolute inset-0 z-0 bg-green-50/70"></div>
+
+  <!-- Content -->
+  <div
+    class="relative z-10 mx-auto flex max-w-6xl flex-col-reverse items-center gap-10 md:flex-row md:gap-12"
+  >
+    <!-- Left: Text Content -->
+    <div class="flex-1 text-center md:text-left animate-slide-in-left">
+      <h1 class="mb-3 text-5xl font-bold text-green-900 md:text-6xl">
+        Sharing Hope with the People of Tanzania
+      </h1>
+
+      <!-- 501(c)(3) Trust Line -->
+      <p
+        class="mb-4 inline-flex items-center rounded-full border border-green-200 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-green-800 md:text-sm"
+      >
+        A Registered 501(c)(3) Nonprofit Organization
+      </p>
+
+      <p class="mb-6 text-lg text-green-900/90 md:text-xl">
+        Word Hope International provides medical care, sustainable farming,
+        education, and spiritual support to communities in Africa.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
+        <a
+          href="/donate"
+          class="rounded-md bg-[#e01b24] px-6 py-3 text-lg font-semibold text-white transition hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-[#e01b24]/40 focus:ring-offset-2 active:scale-[0.97]"
+        >
+          Donate Now
+        </a>
+
+        <a
+          href="/about"
+          class="rounded-md border border-[#e01b24] bg-white/70 px-6 py-3 text-lg font-semibold text-[#e01b24] transition hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#e01b24]/30 focus:ring-offset-2 active:scale-[0.97]"
+        >
+          Learn More
+        </a>
+      </div>
+
+      <!-- Optional reassurance line -->
+      <p class="mt-4 text-sm text-green-900/70">
+        Donations support on-the-ground programs and outreach.
+      </p>
+    </div>
+
+    <!-- Right: Logo -->
+    <div class="flex-1 animate-slide-in-right">
+      <div
+        class="mx-auto w-fit rounded-3xl bg-white/70 p-6 shadow-sm backdrop-blur md:p-8"
+      >
+        <img
+          src="/img/WordHopeLogo.png"
+          alt="Word Hope International logo"
+          class="mx-auto w-64 max-w-xs md:w-80 md:max-w-sm"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Motion without JS (2026 best practice) */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out both;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out both;
+    animation-delay: 0.15s;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-slide-in-left,
+    .animate-slide-in-right {
+      animation: none;
+    }
+  }
+</style>

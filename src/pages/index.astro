@@ -1,17 +1,28 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroLanding from "../components/home/HeroLanding.astro";
+import MissionSection from "../components/home/MissionSection.astro"
+import ImpactSection from "../components/home/ImpactSection.astro"
+import GetInvolvedSection from "../components/home/GetInvolvedSection.astro"
+import GallerySection from "../components/home/GallerySection.astro"
+import TestimonialSection from "../components/home/TestimonialSection.astro"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Home",
+    description:
+      "Word Hope International serves communities through faith, compassion, and sustainable outreach.",
+  }}
+>
+
+  <HeroLanding/>
+  <MissionSection/>
+  <ImpactSection/>
+  <GetInvolvedSection/>
+  <GallerySection/>
+  <TestimonialSection/>
+
+
+</BaseLayout>

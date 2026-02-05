@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/shared/Hero.astro";
+import ContactForm from "../components/islands/ContactFormIsland.jsx";
+
+const seo = {
+  title: "Contact",
+  description:
+    "Contact Word Hope International about donations, sponsorship, volunteering, mission trips, or program questions. We’ll respond as soon as we can.",
+};
+
+const hero = {
+  heading: "Contact Us",
+  subheading:
+    "Have a question about giving, sponsorship, volunteering, mission trips, or our programs? Send us a message and we’ll follow up soon.",
+  primaryCtaText: "Donate",
+  primaryCtaLink: "/donate",
+  secondaryCtaText: "Get Involved",
+  secondaryCtaLink: "/programs",
+  backgroundImage: "/img/contact-hero.jpeg", // swap to whatever image you want in /public/img
+};
+---
+
+<BaseLayout hero={true} seo={seo}>
+  <Hero {...hero} />
+
+  <ContactForm client:load />
+</BaseLayout>

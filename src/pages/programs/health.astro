@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/shared/Hero.astro";
+import HealthAndHealingSection from "../../components/programs/Health.astro";
+---
+
+<BaseLayout
+  hero={true}
+  seo={{
+    title: "Health & Healing",
+    description:
+      "Christ-centered healthcare for underserved communities in Tanzania through mobile bush clinics and year-round medical care.",
+  }}
+>
+  <Hero
+    heading="Health & Healing"
+    subheading="Bringing compassionate, Christ-centered healthcare to underserved communities in Tanzania."
+    primaryCtaText="Donate"
+    primaryCtaLink="/donate"
+    secondaryCtaText="Get Involved"
+    secondaryCtaLink="/contact"
+    backgroundImage="/img/clinic.jpeg"
+  />
+
+  <HealthAndHealingSection />
+</BaseLayout>

@@ -1,0 +1,479 @@
+---
+/** ---------- data ---------- */
+const TIMELINE = [
+  {
+    id: "tractor",
+    title: "Tractor & Trailer Purchased",
+    detail:
+      "A tractor and trailer have been purchased to accelerate land prep and ongoing farm operations.",
+    status: "complete",
+  },
+  {
+    id: "land-cleared",
+    title: "First 100 Acres Cleared & Plowed",
+    detail:
+      "The initial 100 acres have been completely cleared, plowed, and are ready for planting.",
+    status: "complete",
+  },
+  {
+    id: "donated-land",
+    title: "Second 100 Acres Donated",
+    detail:
+      "The village has generously donated an additional 100 acres. Legal recognition is pending due to Tanzania’s national elections.",
+    status: "blocked",
+    note: "Next step: official recognition following election-related shutdowns.",
+  },
+  {
+    id: "second-well",
+    title: "2nd Irrigation Well Fundraising",
+    detail:
+      "Once the second plot is official, we will raise funds and begin drilling the second well for irrigation.",
+    status: "planned",
+  },
+  {
+    id: "bricks",
+    title: "50,000 Bricks Made & Fired",
+    detail:
+      "Local teams produced and fired 50,000 bricks for a multi-purpose community center (church, clinic, school, conference area, and worker housing).",
+    status: "active",
+  },
+  {
+    id: "stones",
+    title: "Foundation Stones Being Gathered",
+    detail:
+      "Stones are being gathered locally to reduce concrete costs and stretch every donated dollar further.",
+    status: "active",
+  },
+];
+
+const FUNDRAISING = [
+  {
+    id: "well-2",
+    project: "2nd Well Drilling",
+    purpose: "Irrigation for the expanded 100-acre farm",
+    goalUSD: 28000,
+    donateHref: "/donate?campaign=second-well",
+  },
+  {
+    id: "foundation",
+    project: "Foundation Construction",
+    purpose: "Base for the multi-purpose community center",
+    goalUSD: 20000,
+    donateHref: "/donate?campaign=foundation",
+  },
+  {
+    id: "building",
+    project: "Building Project",
+    purpose: "Materials and labor for the full structure",
+    goalUSD: 60000,
+    donateHref: "/donate?campaign=building",
+  },
+];
+
+/** ---------- helpers ---------- */
+function statusStyles(status) {
+  switch (status) {
+    case "complete":
+      return {
+        dot: "var(--green-600)",
+        ring: "rgba(34,197,94,.18)",
+        badgeBg: "rgba(34,197,94,.12)",
+        badgeBorder: "rgba(34,197,94,.25)",
+        badgeText: "var(--green-800)",
+        connector: "rgba(34,197,94,.25)",
+      };
+    case "active":
+      return {
+        dot: "var(--amber-500)",
+        ring: "rgba(245,158,11,.18)",
+        badgeBg: "rgba(245,158,11,.14)",
+        badgeBorder: "rgba(245,158,11,.28)",
+        badgeText: "var(--amber-800)",
+        connector: "rgba(245,158,11,.28)",
+      };
+    case "blocked":
+      return {
+        dot: "var(--red-600)",
+        ring: "rgba(239,68,68,.16)",
+        badgeBg: "rgba(239,68,68,.12)",
+        badgeBorder: "rgba(239,68,68,.22)",
+        badgeText: "var(--red-800)",
+        connector: "rgba(239,68,68,.22)",
+      };
+    default:
+      return {
+        dot: "rgba(148,163,184,1)",
+        ring: "rgba(148,163,184,.18)",
+        badgeBg: "rgba(148,163,184,.12)",
+        badgeBorder: "rgba(148,163,184,.22)",
+        badgeText: "rgba(51,65,85,1)",
+        connector: "rgba(148,163,184,.22)",
+      };
+  }
+}
+
+function currency(n) {
+  return `$${Number(n).toLocaleString("en-US")}`;
+}
+
+const { lastUpdated } = Astro.props;
+---
+
+<!-- Timeline -->
+<section class="updates bg-green-50 py-12 px-6 md:px-12">
+  <div class="max-w-5xl mx-auto reveal" data-reveal="up">
+    <h2 class="text-2xl font-bold text-green-900 mb-6">📅 Timeline of Progress</h2>
+
+    <ol class="timeline" aria-label="Project timeline">
+      <span aria-hidden class="timeline__rail"></span>
+
+      {TIMELINE.map((item, idx) => {
+        const s = statusStyles(item.status);
+        const isLast = idx === TIMELINE.length - 1;
+        return (
+          <li class="timeline__item">
+            {!isLast && (
+              <span
+                aria-hidden
+                class="timeline__connector"
+                style={`background:${s.connector};`}
+              />
+            )}
+
+            <span
+              aria-hidden
+              class="timeline__dot"
+              style={`background:${s.dot}; box-shadow: 0 0 0 6px ${s.ring};`}
+            />
+
+            <div class="timeline__card">
+              <div class="timeline__header">
+                <h3 class="timeline__title">{item.title}</h3>
+
+                <span
+                  class="timeline__badge"
+                  style={`background:${s.badgeBg}; border-color:${s.badgeBorder}; color:${s.badgeText};`}
+                  aria-label={`Status: ${item.status}`}
+                  title={`Status: ${item.status}`}
+                >
+                  {item.status === "complete" && "Completed"}
+                  {item.status === "active" && "In Progress"}
+                  {item.status === "blocked" && "Pending"}
+                  {item.status === "planned" && "Planned"}
+                </span>
+              </div>
+
+              <p class="timeline__detail">{item.detail}</p>
+
+              {item.note && <p class="timeline__note">{item.note}</p>}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>
+
+<!-- Fundraising -->
+<section class="bg-white py-16 px-6 md:px-12">
+  <div class="max-w-5xl mx-auto reveal" data-reveal="up">
+    <h2 class="text-2xl font-bold text-green-900 mb-6">💝 Current Fundraising Projects</h2>
+
+    <div class="cards">
+      {FUNDRAISING.map((f) => (
+        <div class="card">
+          <h3 class="card__title">{f.project}</h3>
+          <p class="card__text">{f.purpose}</p>
+
+          <div class="card__goal">
+            <span class="card__goalLabel">Goal</span>
+            <span class="card__goalValue">{currency(f.goalUSD)}</span>
+          </div>
+
+          <div class="card__actions">
+            <a
+              href={f.donateHref || "/donate"}
+              class="card__btn"
+              aria-label={`Donate to ${f.project}`}
+            >
+              Donate
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {lastUpdated && (
+      <p class="mt-6 text-sm text-green-700/80">
+        Last updated: <span class="font-semibold">{lastUpdated}</span>
+      </p>
+    )}
+
+    <!-- Optional table view for accessibility / copy-paste -->
+    <div class="sr-only">
+      <table>
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Purpose</th>
+            <th>Goal (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {FUNDRAISING.map((f) => (
+            <tr>
+              <td>{f.project}</td>
+              <td>{f.purpose}</td>
+              <td>{currency(f.goalUSD)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-green-50 py-16 px-6 md:px-12 text-center">
+  <div class="max-w-3xl mx-auto reveal" data-reveal="up">
+    <p class="text-green-900 text-xl font-semibold mb-6">
+      “Every seed, every brick, every prayer moves this vision forward.”
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="/donate"
+        class="bg-[#e01b24] text-white font-semibold px-6 py-3 rounded-md hover:opacity-90"
+      >
+        Donate to the Project
+      </a>
+      <a
+        href="/contact"
+        class="border border-[#e01b24] text-[#e01b24] font-semibold px-6 py-3 rounded-md hover:bg-[#e01b24]/10"
+      >
+        Partner or Sponsor
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const els = document.querySelectorAll(".reveal");
+  if (!prefersReduced) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add("is-visible"));
+  }
+</script>
+
+<style>
+  :root {
+    --green-600: rgba(22,163,74,1);
+    --green-800: rgba(22,101,52,1);
+    --amber-500: rgba(245,158,11,1);
+    --amber-800: rgba(146,64,14,1);
+    --red-600: rgba(220,38,38,1);
+    --red-800: rgba(153,27,27,1);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* Timeline layout (framework-free) */
+  .timeline {
+    position: relative;
+    margin-left: 1rem;
+    padding-left: 1.25rem;
+  }
+
+  .timeline__rail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: rgba(22, 163, 74, 0.12);
+    border-radius: 999px;
+  }
+
+  .timeline__item {
+    position: relative;
+    padding: 1.5rem 0 1.5rem 2rem;
+  }
+
+  .timeline__connector {
+    position: absolute;
+    left: 0;
+    top: 2.1rem;
+    width: 6px;
+    height: calc(100% - 2.4rem);
+    border-radius: 999px;
+  }
+
+  .timeline__dot {
+    position: absolute;
+    left: -0.6rem;
+    top: 1.1rem;
+    height: 18px;
+    width: 18px;
+    border-radius: 999px;
+    border: 2px solid rgba(0,0,0,0.06);
+  }
+
+  .timeline__card {
+    background: #ffffff;
+    border: 1px solid rgba(22, 163, 74, 0.12);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+
+  .timeline__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .timeline__title {
+    font-weight: 800;
+    color: rgba(20,83,45,1);
+    font-size: 1.05rem;
+  }
+
+  .timeline__badge {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .timeline__detail {
+    margin-top: 0.5rem;
+    color: rgba(77,124,89,1);
+    line-height: 1.6;
+  }
+
+  .timeline__note {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(77,124,89,0.9);
+  }
+
+  /* Fundraising cards */
+  .cards {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card {
+    border: 1px solid rgba(22, 163, 74, 0.12);
+    background: rgba(240, 253, 244, 1);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+
+  .card__title {
+    font-weight: 800;
+    color: rgba(20,83,45,1);
+    font-size: 1.05rem;
+  }
+
+  .card__text {
+    margin-top: 0.25rem;
+    color: rgba(77,124,89,1);
+    line-height: 1.6;
+  }
+
+  .card__goal {
+    margin-top: 1rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .card__goalLabel {
+    font-size: 0.9rem;
+    color: rgba(77,124,89,0.9);
+  }
+
+  .card__goalValue {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: rgba(20,83,45,1);
+  }
+
+  .card__actions {
+    margin-top: 1rem;
+  }
+
+  .card__btn {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background: #e01b24;
+    color: #fff;
+    padding: 0.7rem 1rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: opacity 160ms ease, transform 120ms ease;
+  }
+
+  .card__btn:hover {
+    opacity: 0.92;
+  }
+
+  .card__btn:active {
+    transform: scale(0.99);
+  }
+</style>

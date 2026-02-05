@@ -1,0 +1,161 @@
+---
+const impactData = [
+  { label: "Evangelism Reached", value: 1274 },
+  { label: "Decisions for Christ", value: 477 },
+  { label: "Pastors Trained", value: 42 },
+  { label: "Farming Trainees", value: 147 },
+  { label: "Women Empowered", value: 919 },
+  { label: "Hygiene Bags Distributed", value: 800 },
+  { label: "Pounds of Rice Given", value: 1800 },
+  { label: "Children Ministered To", value: 528 },
+  { label: "Mosquito Nets Given", value: 75 },
+  { label: "Eyeglasses Provided", value: 125 },
+];
+---
+
+<section class="bg-green-50 py-16 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto">
+    <!-- Heading -->
+    <h2
+      class="text-4xl md:text-5xl font-bold text-green-900 text-center mb-4 reveal"
+      data-reveal="up"
+    >
+      Summer 2025 Mission Trip in Qandach, Tanzania
+    </h2>
+
+    <!-- Overview -->
+    <p
+      class="text-lg text-green-800 max-w-4xl mx-auto mb-10 leading-relaxed reveal"
+      data-reveal="up"
+      style="--reveal-delay: 80ms;"
+    >
+      In Summer 2025, our mission team served the people of Qandach Village,
+      Tanzania through medical outreach, evangelism, discipleship, and
+      humanitarian aid. A fully functional medical clinic was operated by a
+      compassionate team of doctors and nurses, touching lives with healing
+      and hope. Evangelism efforts reached 1,274 people, with 477 decisions
+      for Christ. Forty-two local pastors were trained, 147 learned Farming
+      God’s Way, and 919 women attended hygiene classes, with 800 bags
+      distributed. Our team shared 1,800 pounds of rice, 528 children were
+      ministered to, 75 mosquito nets were given out, and 125 glasses were
+      fitted by our optometry team. Every effort reflected the love of Christ,
+      bringing hope and lasting transformation.
+    </p>
+
+    <!-- Stats -->
+    <h3
+      class="text-3xl font-bold text-center text-green-900 mb-8 reveal"
+      data-reveal="up"
+    >
+      Impact by the Numbers
+    </h3>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-10 mb-12">
+      {impactData.map((item, i) => (
+        <div
+          class="flex flex-col items-center reveal"
+          data-reveal="up"
+          style={`--reveal-delay: ${i * 70}ms;`}
+        >
+          <div
+            class="countup text-4xl font-bold text-[#e01b24]"
+            data-value={item.value}
+          >
+            0
+          </div>
+          <p class="text-green-800 text-lg mt-2 text-center">
+            {item.label}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div
+      class="flex justify-center reveal"
+      data-reveal="up"
+      style="--reveal-delay: 200ms;"
+    >
+      <a
+        href="/project-updates"
+        class="bg-[#e01b24] text-white font-semibold px-8 py-3 rounded-md shadow-md hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-[#e01b24]/40"
+      >
+        View Project Updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Reveal animation */
+  const reveals = document.querySelectorAll(".reveal");
+  if (!prefersReduced) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            revealObserver.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    reveals.forEach((el) => revealObserver.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add("is-visible"));
+  }
+
+  /* Count-up animation */
+  const counters = document.querySelectorAll(".countup");
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+        const target = parseInt(el.dataset.value, 10);
+        let current = 0;
+        const duration = 1800;
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          current = Math.floor(progress * target);
+          el.textContent = current.toLocaleString();
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach((el) => counterObserver.observe(el));
+</script>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
