@@ -55,7 +55,7 @@ export default function DonateIsland() {
 
   const stripePromise = useMemo(() => {
     const pk =
-      import.meta.env.PUBLIC_STRIPE_PUBLIC_KEY || import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+      import.meta.env.PUBLIC_STRIPE_PUBLIC_KEY
     if (!pk) return null;
     return loadStripe(pk);
   }, []);
